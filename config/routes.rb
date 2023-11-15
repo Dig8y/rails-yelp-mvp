@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  get 'restaurants/index'
+  get 'restaurants/show'
+  get 'restaurants/edit'
+  get 'restaurants/update'
+  get 'restaurants/new'
+  get 'restaurants/create'
+  get 'restaurants/destroy'
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
@@ -7,4 +14,9 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   # root "posts#index"
+  resources :restaurants, except: [:destroy] do
+    resources :reviews, only: [:index, :new, :create]
+  end
+  resources :reviews, only: [:edit, :update, :destroy, :show]
+  delete 'restaurants/:id', to: 'restaurants#destroy', as: 'destroy_restaurant'
 end

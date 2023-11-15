@@ -1,0 +1,19 @@
+<nav class="navbar navbar-light bg-light p-2">
+  <%= link_to 'restaurants', restaurants_path %>
+  <%= link_to 'add restaurant', restaurants_new_path, class: "btn btn-primary" %>
+</nav>
+<h1><%= @restaurant.name %></h1>
+
+<h4>Location: <%= @restaurant.address %></h4>
+<h4>Contact: <%= @restaurant.phone_number %></h4>
+<h4>Category: <%= @restaurant.category %></h4>
+<p><strong>Reviews</strong></p>
+<ul>
+<% @restaurant.reviews.each do |review| %>
+<li>
+  <p><%= review.rating %>/5 <%= review.content %></p>
+</li>
+<% end %>
+</ul>
+
+<%= link_to 'add a review',  new_restaurant_review_path(@restaurant) %>
